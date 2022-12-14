@@ -70,11 +70,13 @@ class NotesController {
         "notes.id",
         "notes.title",
         "notes.user_id",
-      ]).where("notes.user_id", user_id)
+      ])
+      .where("notes.user_id", user_id)
       .whereLike("notes.title", `%${title}%` )
       .whereIn("name", filterTags)
       .innerJoin("notes", "notes.id", "tags.note_id")
       .orderBy("notes.title")
+      .groupBy("notes.id")
 
     } else {
 
